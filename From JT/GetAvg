@@ -1,0 +1,13 @@
+// Get the average value from a list of floats.
+// Caveat: There isn't enough space to store all values.
+
+public float getAvg(List<Float> list) {
+  int n = list.size();
+  float curr = list.get(0);
+  for (int i = 1; i < list.size(); i++) {
+    // calculate the average using only the previous average value and new value read in
+    float next = list.get(i);
+    curr = (curr * i + next) / i + 1;
+  }
+  return curr;
+}
