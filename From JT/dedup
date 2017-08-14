@@ -1,3 +1,5 @@
+// Given a collection of values, remove all duplicates.
+
 import java.util.*;
 import java.util.stream.*;
 
