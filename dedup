@@ -1,0 +1,37 @@
+import java.util.*;
+import java.util.stream.*;
+
+public class Dedup {
+
+    public static Collection<String> deduplicate(Collection<String> values) {
+        return values.stream().distinct().collect(Collectors.toList());
+    }
+
+    public static Collection<String> deduplicateBySet(Collection<String> values) {
+        return new HashSet<>(values);
+    }
+
+    public static Collection<String> deduplicateSort(Collection<String> values) {
+        List<String> list = new ArrayList<>(values);
+        Collections.sort(list);
+        int j = 1;
+        while (j < list.size()) {
+            if (list.get(j).equals(list.get(j-1))) {
+                list.remove(j);
+            } else{
+                j++;
+            }
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        Collection<String> arrayWithDupes = Arrays.asList(new String[] {
+            "foo", "foo", "bar", "baz", "baz", "bad", "abc", "abc", "abc"
+        });
+        Collection<String> deduped = deduplicateSort(arrayWithDupes);
+        
+        deduped.forEach(System.out::println);
+    }
+
+}
