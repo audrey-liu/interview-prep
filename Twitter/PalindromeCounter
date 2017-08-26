@@ -1,0 +1,23 @@
+    static int countPalindromes(String s) {
+        if (s.isEmpty()) return 0;
+        int num = 0;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                String sub = s.substring(i, j);
+                boolean b = isPal(sub);
+                if (b) num++;
+            }
+        }
+        return num;
+    }
+
+    static boolean isPal(String sub) {
+                        int start = 0;
+                int end = sub.length() - 1;
+                while (end > start) {
+                    if (sub.charAt(start) != sub.charAt(end)) return false;
+                    ++start;
+                    --end;
+                }
+        return true;
+    }
