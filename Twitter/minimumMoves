@@ -1,0 +1,17 @@
+    static int minimumMoves(int[] a, int[] m) {
+        int numMoves = 0;
+        for (int i = 0; i < a.length; i++) {
+            int aNum = a[i];
+            int mNum = m[i];
+            while (aNum > 0 && mNum > 0) {
+                int aDig = aNum % 10;
+                int mDig = mNum % 10;
+                int diff = Math.abs(aDig - mDig);
+                numMoves += diff;
+                aNum /= 10;
+                mNum /= 10;
+            }
+        }
+        return numMoves;
+
+    }
