@@ -1,23 +1,37 @@
+   // Count the number of palindromes in all substrings of a string greater than or equal to 2
+   // Input: a String
+   // Output: number of palindromes
+    
     static int countPalindromes(String s) {
-        if (s.isEmpty()) return 0;
-        int num = 0;
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i + 1; j <= s.length(); j++) {
-                String sub = s.substring(i, j);
-                boolean b = isPal(sub);
-                if (b) num++;
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        boolean[][] pal = new boolean[n][n];
+        // single length palindromes
+        for (int i = 0; i < n; i++) {
+            pal[i][i] = true;
+        }
+        // palindromes of length 2
+        for (int i = 0; i < n-1; i++) {
+            if (s.charAt(i) == s.charAt(i+1) {
+                pal[i][i+1] = true;
+                dp[i][i+1] = 1;
             }
         }
-        return num;
+        // length greater than 2
+        for (int gap = 2; gap < n; gap++) {
+            for (int i = 0; i < n - gap; i++) {
+                int j = gap + i;
+                if (str.charAt(i) == str.charAt(j)) pal[i][j] = true;
+                if (pal[i][j] == true) {
+                    dp[i][j] = dp[i+1][j] + dp[i][j-1] + 1 - dp[i+1][j-1];
+                } else {
+                    dp[i][j] = dp[i+1][j] + dp[i][j-1] - dp[i+1][j-1];
+                }
+            }
+        }
+        return dp[0][n-1];
     }
 
-    static boolean isPal(String sub) {
-                        int start = 0;
-                int end = sub.length() - 1;
-                while (end > start) {
-                    if (sub.charAt(start) != sub.charAt(end)) return false;
-                    ++start;
-                    --end;
-                }
-        return true;
-    }
+
+// Runtime: O(n^2) 
+// Space: O(n^2)
