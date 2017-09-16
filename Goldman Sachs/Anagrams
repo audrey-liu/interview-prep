@@ -1,0 +1,40 @@
+    static boolean isAnagram(String str1, String str2) {
+        if (str1 == null || str2 == null) return false;
+        if (str1.equals(str2)) return true;
+        if (str1 == ""|| str2 == "") return false;
+        
+        str1 = standardize(str1);
+        str2 = standardize(str2);
+        if (str1.length() != str2.length()) return false;
+        
+        // place all characters of str1 into hashmap
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        for (int i = 0; i < str1.length(); i++) {
+            char c = str1.charAt(i);
+            if (map.containsKey(c)) map.put(c, map.get(c) + 1);
+            else map.put(c, 1);
+        }
+        
+        // remove all matching characters in str2 from map
+        for (int j = 0; j < str2.length(); j++) {
+            char c = str2.charAt(j);
+            if (map.containsKey(c)) {
+                int num = map.get(c);
+                if (num > 1) map.put(c, num - 1);
+                else map.remove(c);
+            }
+            // if str2 contains a character not in str1
+            else return false;
+        }
+        
+        // map must be empty if the two strings are anagrams
+        return map.isEmpty();
+    }
+    
+    // remove all non-alphabet characters and turn the rest into all lowercase
+    // also delete all whitespace
+    static String standardize(String str) {
+        str = str.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        str = str.replaceAll("\\s+","");
+        return str;
+    }
