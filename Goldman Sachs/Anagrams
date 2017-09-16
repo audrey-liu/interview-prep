@@ -1,3 +1,6 @@
+     // Input: Two strings
+     // Output: Boolean indicating whether they're anagrams or not 
+    
     static boolean isAnagram(String str1, String str2) {
         if (str1 == null || str2 == null) return false;
         if (str1.equals(str2)) return true;
@@ -38,3 +41,6 @@
         str = str.replaceAll("\\s+","");
         return str;
     }
+    
+    Runtime: O(n) where n is length of longer string
+    Space: O(n) where n is length of str1 (or whichever string is put into hashmap)
