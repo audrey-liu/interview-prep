@@ -1,3 +1,6 @@
+    // Input: double array of student names and scores
+    // Output: int (best average score)
+    
     static int bestAverageGrade(String[][] scores) {
         if (scores == null || scores.length == 0) return 0;
         
@@ -34,3 +37,6 @@
         
         return max;
     }
+    
+    // Runtime: O(n) where n is number of arrays in input double array
+    // Space: O(n) 
