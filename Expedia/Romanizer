@@ -1,0 +1,80 @@
+/*
+ * Complete the function below.
+ */
+
+    static String[] romanizer(int[] numbers) {
+        int len = numbers.length;
+        String[] arr = new String[len];
+        for (int i = 0; i < len; i++) {
+            StringBuilder str = new StringBuilder();
+            int num = numbers[i];
+            str = romanize(num, str);
+            arr[i] = str.toString();
+        }
+        return arr;
+    }
+
+    static StringBuilder romanize(int num, StringBuilder str) {
+        if (num == 0) return str;
+        
+        if (num == 1000) {
+            str.append('M');
+            return str;
+        } else if (num >= 900) {
+            str.append("CM");
+            num = num % 900;
+            romanize(num, str);
+        } else if (num >= 500) {
+            str.append('D');
+            num = num % 500;
+            romanize(num, str);
+        } else if (num >= 400) {
+            str.append("CD");
+            num = num % 400;
+            romanize(num, str);
+        } else if (num >= 100) {
+            int n = num / 100;
+            for (int j = 0; j < n; j++) {
+                str.append('C');
+            }
+            num = num % (n * 100);
+            romanize(num, str);
+        } else if (num >= 90) {
+            str.append("XC");
+            num = num % 90;
+            romanize(num, str);
+        } else if (num >= 50) {
+            str.append('L');
+            num = num % 50;
+            romanize(num, str);
+        } else if (num >= 40) {
+            str.append("XL");
+            num = num % 40;
+            romanize(num, str);
+        } else if (num >= 10) {
+            int n = num / 10;
+            for (int j = 0; j < n; j++) {
+                str.append('X');
+            }
+            num = num % (n * 10);
+            romanize(num, str);
+        } else if (num >= 9) {
+            str.append("IX");
+            num = num % 9;
+            romanize(num, str);
+        } else if (num >= 5) {
+            str.append('V');
+            num = num % 5;
+            romanize(num, str);
+        } else if (num >= 4) {
+            str.append("IV");
+            num = num % 4;
+            romanize(num, str);
+        } else {
+            for (int j = 0; j < num; j++) {
+                str.append('I');
+            }
+        }
+        return str;
+    }
+
