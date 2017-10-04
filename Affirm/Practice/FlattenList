@@ -1,0 +1,33 @@
+// flatten a list recursively
+
+List flatten (List<E> in) {
+	List<E> out = new ArrayList<E>();
+	for (E obj : in) {
+		if (!obj instanceof List) {
+			out.add(obj);
+		} else {
+			out.addAll(flatten((List)obj));
+		}
+	}
+}
+
+// flatten non-recursively
+
+List iterativeFlatten(List<E> in) {
+	List<E> out = new ArrayList<E>();
+	Deque<List<E>> stack = new ArrayDeque<List<E>>();
+	stack.push(in);
+	while (!stack.isEmpty()) {
+		List<E> l = stack.peek();
+		if (l.isEmpty()) stack.pop();
+		for (E obj : l) {
+			if (obj instanceof List) {
+				stack.push((List)obj);
+				break;
+			} else {
+				out.add(obj);
+				l.remove(obj);
+			}
+		}
+	}
+}
