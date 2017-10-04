@@ -1,0 +1,26 @@
+public class Stack {
+	private Object top;
+	private Stack rest;
+
+	public Stack(Object top, Stack rest) {
+		this.top = top;
+		this.rest = rest;
+	}
+
+	public Stack push(Object obj) {
+		return new Stack(obj, this);
+	}
+
+	public Stack pop() {
+		return rest;	
+	}
+
+	public boolean isEmpty() {
+		return this == rest;
+	}
+
+	public Object peek() {
+		return top;
+	}
+
+}
