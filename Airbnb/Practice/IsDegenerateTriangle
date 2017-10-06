@@ -1,0 +1,12 @@
+    static String[] triangleOrNot(int[] a, int[] b, int[] c) {
+        int len = a.length;
+        String[] ans = new String[len];
+        for (int i = 0; i < len; i++) {
+            int s1 = a[i];
+            int s2 = b[i];
+            int s3 = c[i];
+            if (s1 + s2 > s3 && s1 + s3 > s2 && s2 + s3 > s1) ans[i] = "Yes";
+            else ans[i] = "No";
+        }
+        return ans;
+    }
