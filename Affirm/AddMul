@@ -1,0 +1,45 @@
+// phone screen
+// example input: ( add 2 3 (mul 5 6) )
+
+int AddMul(String exp) {
+	String[] arr = exp.split("\\s+");
+	Deque<String> stack = new ArrayDeque<String>();
+	String currOp = "";
+	for (int i = 0; i < arr.length; i++) {
+		String str = arr[i];
+		if (str.equals("add") {
+			stack.push(str);
+			currOp = "add";
+		} else if (str.equals("mul")) {
+			stack.push(str);
+			currOp = "mul";
+		} else if (str.equals(")")) {
+			String s = stack.peek();
+			if (currOp.equals("add")) {
+				int sum = 0;
+				while (!s.equals("add")) {
+					int n = Integer.parseInt(s);
+					sum = sum + n;
+					stack.pop();
+					s = stack.peek();
+				}
+				stack.pop();
+				stack.pop();
+				stack.push(sum);
+			} else {
+				int prod = 1;
+				while (!s.equals("mul")) {
+					int n = Integer.parseInt(s);
+					prod = prod * n;
+					stack.pop();
+					s = stack.peek();
+				}
+				stack.pop();
+				stack.pop();
+				stack.push(prod);
+			}
+		} else stack.push(str);
+	}
+	return stack.peek();
+}
+
