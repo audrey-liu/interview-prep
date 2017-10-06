@@ -1,0 +1,75 @@
+    static String[] doesCircleExist(String[] commands) {
+        int len = commands.length;
+        String[] ans = new String[len];
+        for (int i = 0; i < len; i++) {
+            char[] command = commands[i].toCharArray();
+            int x = 0;
+            int y = 0; 
+            Direction dir = Direction.UP;
+            for (int k = 0; k < 4; k++) {
+            for (int j = 0; j < command.length; j++) {
+                char c = command[j];
+                switch (c) {
+                    case 'G':
+                        switch(dir) {
+                            case UP:
+                                y++;
+                                break;
+                            case DOWN:
+                                y--;
+                                break;
+                            case LEFT:
+                                x--;
+                                break;
+                            case RIGHT:
+                                x++;
+                                break;
+                        }
+                        break;
+                    case 'L':
+                        switch(dir) {
+                            case UP:
+                                dir = Direction.LEFT;
+                                break;
+                            case DOWN:
+                                dir = Direction.RIGHT;
+                                break;
+                            case LEFT:
+                                dir = Direction.DOWN;
+                                break;
+                            case RIGHT:
+                                dir = Direction.UP;
+                                break;
+                        }
+                        break;
+                    case 'R':
+                        switch(dir) {
+                            case UP:
+                                dir = Direction.RIGHT;
+                                break;
+                            case DOWN:
+                                dir = Direction.LEFT;
+                                break;
+                            case LEFT:
+                                dir = Direction.UP;
+                                break;
+                            case RIGHT:
+                                dir = Direction.DOWN;
+                                break;
+                        }
+                        break;
+                }
+            }
+            }
+            if (x == 0 && y == 0) ans[i] = "YES";
+            else ans[i] = "NO";
+        }
+        return ans;
+    }
+
+    public enum Direction {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT;
+    }
