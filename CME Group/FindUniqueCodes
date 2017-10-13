@@ -1,0 +1,14 @@
+// given array of strings, find number of unique strings
+// the reverse of a string also counts as the same
+
+num findUniqueCodes(String[] codes) { 
+	HashMap<String, Integer> map = new HashMap<String, Integer>();
+	for (String code : codes) {
+		if (!map.contains(code)) {
+			map.put(code, 1);
+			StringBuilder rev = new StringBuilder(code).reverse();
+			map.put(rev.toString(), 1);
+		}
+	}
+	return (map.size() / 2);
+}
