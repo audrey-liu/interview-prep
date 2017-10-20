@@ -1,0 +1,20 @@
+// Input: number x
+// Output: print smallest Fibonacci number > x, largest Fibonacci number < x
+
+void fibonacciCeilingFloor (int x) {
+        // error check
+        if (x <= 0) System.out.println("error");
+
+        int minusTwo = 0;
+        int minusOne = 1;
+        int curr = 1;
+        while (curr <= x) {
+                int temp = curr;
+                curr = minusOne + minusTwo;
+                minusTwo = minusOne;
+                minusOne = temp;
+        }
+        System.out.println("Ceiling: " + curr);
+        while (minusOne >= x) minusOne--;
+        System.out.println("Floor: " + minusOne);
+}
