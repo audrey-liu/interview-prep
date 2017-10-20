@@ -1,0 +1,17 @@
+// Input: row-wise and column-wise sorted N x N matrix, number x
+// Output: position of x if present
+
+void sortedMatrixSearch(int[][] mat, int n, int x) {
+       // set top right indices
+       int i = 0, j = n - 1;
+
+       while (i < n && j >= 0) {
+                int e = mat[i][j];
+                if (e == x) System.out.println("Found at " + i + ", " + j);
+                // go left if x is smaller
+                else if (e > x) j--;
+                else i++;
+       }
+       System.out.println("Not found");
+       return;
+}
