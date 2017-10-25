@@ -1,0 +1,70 @@
+Input: String array in following format: "<name>;START" or "<name>;8" or "<name>;8,9,10"
+Output: String array in format "line number;<name>;<error-type>" (SHORTENED_JOB or SUSPICIOUS_BATCH)
+
+    /*
+     * Complete the function below.
+     */
+    static String[] findViolations(String[] datafeed) {
+        List<String> ans = new ArrayList<String>();
+
+        Map<String, Integer> startLine = new HashMap<String, Integer>();
+        Map<String, Integer> submitLine = new HashMap<String, Integer>();
+        Map<Integer, String> submitTime = new HashMap<Integer, String>();
+        TreeSet<Integer> times = new TreeSet<Integer>();
+        
+        int line = 1;
+        int index = 0;
+        for (String str : datafeed) {
+            String[] arr = str.split(";");
+            if (arr[1].equals("START")) startLine.put(arr[0], line);
+            
+            else if (arr[1].contains(",")) {
+                String[] ids = arr[1].split(",");
+                int[] intIds = new int[ids.length];
+                for (int i = 0; i < ids.length; i++) {
+                    int intId = Integer.parseInt(ids[i]);
+                    intIds[i] = intId;
+                }
+                Arrays.sort(intIds);
+                int smallestId = intIds[0];
+                if (!times.isEmpty() && smallestId < times.first()) {
+                     String name = submitTime.get(times.first());
+                     int submittedLine = submitLine.get(name);
+                     if (submittedLine < startLine.get(arr[0])) {
+                         ans.add(line + ";" + arr[0] + ";SUSPICIOUS_BATCH");
+                     } else {
+                         submitLine.put(arr[0], line);
+                         submitTime.put(smallestId, arr[0]);
+                         times.add(smallestId);
+                     }
+                } else {
+                      submitLine.put(arr[0], line);
+                      submitTime.put(smallestId, arr[0]);
+                      times.add(smallestId);
+                }
+            }
+            
+            else {
+                   int id = Integer.parseInt(arr[1]);
+                   if (!times.isEmpty() && id < times.first()) {
+                     String name = submitTime.get(times.first());
+                     int submittedLine = submitLine.get(name);
+                     if (submittedLine < startLine.get(arr[0])) {
+                         ans.add(startLine.get(arr[0]) + ";" + arr[0] + ";SHORTENED_JOB");
+                     } else {
+                         submitLine.put(arr[0], line);
+                         submitTime.put(id, arr[0]);
+                         times.add(id);
+                     }
+                } else {
+                      submitLine.put(arr[0], line);
+                      submitTime.put(id, arr[0]);
+                      times.add(id);
+                }              
+            }
+            line++;
+            index++;
+        }
+        String[] answer = ans.toArray(new String[ans.size()]);
+        return answer;
+    }
