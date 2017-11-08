@@ -1,0 +1,31 @@
+String addStringNums(String a, String b) {
+	StringBuilder sb = new StringBuilder();
+
+	int i = a.length();
+	int j = b.length();
+
+	int carry = 0;
+
+	while (i >= 0 || j >= 0) {
+		int aDigit;
+		if (i < 0) aDigit = 0;
+		else aDigit = Character.digit(s.charAt(i), 10);
+
+		int bDigit;
+		if (j < 0) bDigit = 0;
+		else bDigit = Character.digit(s.charAt(j), 10);
+
+		int sum = aDigit + bDigit;
+		if (carry > 0) sum += carry;
+		if (sum >= 10) {
+			carry = sum / 10;
+			sum = sum % 10;
+		}
+
+		sb.append(sum);
+	}
+
+	if (carry > 0) sb.append(carry);
+
+	return sb.reverse().toString();
+}
